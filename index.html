@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 🎉</title>
+
+<style>
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    font-size: 55px;
+    color: white;
+    margin-top: 30px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px white, 0 0 20px pink; }
+    to { text-shadow: 0 0 20px white, 0 0 40px red; }
+}
+
+/* Message */
+.message {
+    font-size: 20px;
+    color: white;
+    width: 80%;
+    margin: auto;
+    margin-top: 15px;
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+/* 🎞️ Slideshow FULL IMAGE NO CARD */
+.slideshow {
+    width: 100%;
+    height: 75vh;
+    margin: 20px auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent; /* ensures transparency for GIF */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Buttons */
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4da6;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background: #ff1a75;
+}
+
+/* Cake */
+.cake {
+    font-size: 70px;
+    margin-top: 10px;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%,100%{transform: translateY(0);}
+    50%{transform: translateY(-15px);}
+}
+
+/* 🎈 Balloon */
+.balloon {
+    position: absolute;
+    width: 60px;
+    height: 80px;
+    border-radius: 50%;
+    bottom: -120px;
+    animation: float 10s linear infinite;
+}
+
+/* Knot */
+.balloon::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: inherit;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+/* Tail */
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    width: 2px;
+    height: 60px;
+    background: rgba(255,255,255,0.8);
+    transform: translateX(-50%);
+}
+
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-130vh); }
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    from { transform: translateY(-10vh); }
+    to { transform: translateY(110vh); }
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    display: none;
+    width: 80%;
+    max-width: 320px;
+}
+
+.popup h2 {
+    color: #ff4da6;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎉 Happy Birthday Nang Marites 🥰 🎉</h1>
+
+<div class="cake">🎂</div>
+
+<div class="message">
+Wishing you a day filled with love, joy, and happiness 💖<br>
+May all your dreams come true and may this year bring you
+success, good health, and endless smiles 😊🎁
+</div>
+
+<button onclick="playMusic()">Play Music 🎵</button>
+<button onclick="showPopup()">Open Surprise 🎁</button>
+
+<!-- 🎞️ Slideshow -->
+<div class="slideshow">
+    <img src="gt.gif" class="slide active">
+    <img src="h1.jpg" class="slide">
+    <img src="h2.jpg" class="slide">
+    <img src="h3.jpg" class="slide">
+    <img src="h4.jpg" class="slide">
+</div>
+
+<audio id="music" loop>
+    <source src="hbd.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+    <h2>🎂 Special Message 🎂</h2>
+    <p>
+        Happy Birthday! 🎉<br><br>
+        You are an amazing person and you deserve all the happiness
+        in the world 💕
+    </p>
+    <button onclick="closePopup()">Close</button>
+</div>
+
+<script>
+/* Slideshow setup */
+const slides = document.querySelectorAll(".slide");
+let current = 0;
+let slideshowInterval = null;
+
+/* Play music AND start slideshow */
+function playMusic() {
+    const music = document.getElementById("music");
+    music.play();
+
+    /* Only start slideshow after music click */
+    if (!slideshowInterval) {
+        slideshowInterval = setInterval(() => {
+            slides.forEach((slide, i) => slide.classList.remove("active"));
+            slides[current].classList.add("active");
+            current = (current + 1) % slides.length;
+        }, 2000);
+    }
+}
+
+function showPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+/* Balloons */
+const colors = ["red","blue","yellow","green","purple","orange","pink"];
+for(let i=0;i<20;i++){
+    let balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.style.left = Math.random()*100 + "vw";
+    balloon.style.background = colors[Math.floor(Math.random()*colors.length)];
+    balloon.style.animationDuration = (6 + Math.random()*5) + "s";
+    document.body.appendChild(balloon);
+}
+
+/* Confetti */
+for(let i=0;i<80;i++){
+    let conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random()*100 + "vw";
+    conf.style.background = colors[Math.floor(Math.random()*colors.length)];
+    conf.style.animationDuration = (3 + Math.random()*3) + "s";
+    document.body.appendChild(conf);
+}
+</script>
+
+</body>
+</html>
