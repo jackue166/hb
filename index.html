@@ -9,7 +9,7 @@ body {
     min-height: 60vh;
     margin: 0;
     overflow-x: hidden;
-    font-family: 'Comic Sans MS', cursive;
+    font-family: Arial, Helvetica, sans-serif; /* Changed to normal font */
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     text-align: center;
 }
@@ -136,6 +136,7 @@ button:hover {
     max-height: 80vh;
     overflow-y: auto;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif; /* Normal font */
 }
 
 .popup img {
@@ -156,20 +157,20 @@ button:hover {
 /* Responsive adjustments */
 @media (max-width: 244px) {
     h1 {
-        font-size: 36px;
+        font-size: 28px;
     }
     .message {
-        font-size: 30px;
+        font-size: 16px;
     }
     .cake {
-        font-size: 50px;
+        font-size: 40px;
     }
     button {
-        font-size: 18px;
-        padding: 12px 24px;
+        font-size: 14px;
+        padding: 10px 20px;
     }
     .popup .greeting {
-        font-size: 20px;
+        font-size: 14px;
         line-height: 1.5;
     }
 }
@@ -180,7 +181,7 @@ button:hover {
         max-width: 320px;
     }
     .popup .greeting {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 </style>
