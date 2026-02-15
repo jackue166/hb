@@ -26,7 +26,7 @@ h1 {
     to { text-shadow: 0 0 20px white, 0 0 40px red; }
 }
 
-/* Message */
+/* Main message */
 .message {
     font-size: 20px;
     color: white;
@@ -34,33 +34,8 @@ h1 {
     margin: auto;
     margin-top: 15px;
     background: rgba(0,0,0,0.2);
-    padding: 15px;
+    padding: 20px;
     border-radius: 15px;
-}
-
-/* 🎞️ Slideshow FULL IMAGE NO CARD */
-.slideshow {
-    width: 100%;
-    height: 55vh;
-    margin: 20px auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.slide.active {
-    opacity: 1;
 }
 
 /* Buttons */
@@ -157,6 +132,8 @@ button:hover {
     display: none;
     width: 90%;
     max-width: 360px;
+    max-height: 80vh;
+    overflow-y: auto;
     text-align: center;
 }
 
@@ -167,11 +144,16 @@ button:hover {
     margin: 10px 0;
 }
 
+.popup .greeting {
+    font-size: 18px;
+    color: #ff4da6;
+    margin: 15px 0;
+    line-height: 1.6;
+    text-align: left;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .slideshow {
-        height: 45vh;
-    }
     h1 {
         font-size: 36px;
     }
@@ -184,6 +166,20 @@ button:hover {
     button {
         font-size: 18px;
         padding: 12px 24px;
+    }
+    .popup .greeting {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}
+@media (max-width: 480px) {
+    .popup {
+        padding: 15px;
+        width: 95%;
+        max-width: 320px;
+    }
+    .popup .greeting {
+        font-size: 14px;
     }
 }
 </style>
@@ -201,17 +197,7 @@ May all your dreams come true and may this year bring you
 success, good health, and endless smiles 😊🎁
 </div>
 
-<button onclick="playMusic()">Play Music 🎵</button>
 <button onclick="showPopup()">Open Surprise 🎁</button>
-
-<!-- 🎞️ Slideshow -->
-<div class="slideshow">
-    <img src="gt.gif" class="slide active">
-    <img src="h1.jpg" class="slide">
-    <img src="h2.jpg" class="slide">
-    <img src="h3.jpg" class="slide">
-    <img src="h4.jpg" class="slide">
-</div>
 
 <!-- Main Music -->
 <audio id="music" loop>
@@ -222,32 +208,20 @@ success, good health, and endless smiles 😊🎁
 <div class="popup" id="popup">
     <h2>🎂 Special Message 🎂</h2>
     <img src="MN.gif" alt="Surprise GIF">
+    <div class="greeting">
+        🎉 Happy Birthday, Nang Marites! 🥰<br><br>
+        May your day be filled with laughter that makes your cheeks hurt, love that makes your heart skip a beat, and all the sweet, silly, unforgettable moments you truly deserve! 💖😄💫<br><br>
+        May you dance like nobody’s watching, sing like nobody’s listening, and eat all the cake without a single worry! 🎂💃<br><br>
+        Wishing you endless hugs, spontaneous giggles, and a sprinkle of magic in every corner of your day. ✨💌<br><br>
+        Remember, you’re not just a year older—you’re a year wiser, bolder, and even more fabulous! Keep shining, keep laughing, and keep loving! 🌹💞
+    </div>
     <audio id="popupMusic" loop>
-        <source src="mb.mp3" type="audio/mpeg">
+        <source src="hbd.mp3" type="audio/mpeg">
     </audio>
     <button onclick="closePopup()">Close</button>
 </div>
 
 <script>
-/* Slideshow setup */
-const slides = document.querySelectorAll(".slide");
-let current = 0;
-let slideshowInterval = null;
-
-/* Play music AND start slideshow */
-function playMusic() {
-    const music = document.getElementById("music");
-    music.play();
-
-    if (!slideshowInterval) {
-        slideshowInterval = setInterval(() => {
-            slides.forEach(slide => slide.classList.remove("active"));
-            slides[current].classList.add("active");
-            current = (current + 1) % slides.length;
-        }, 2000);
-    }
-}
-
 function showPopup() {
     document.getElementById("popup").style.display = "block";
     const popupMusic = document.getElementById("popupMusic");
